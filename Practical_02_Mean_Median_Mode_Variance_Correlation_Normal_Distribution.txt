@@ -1,0 +1,96 @@
+# PRACTICAL 02 - MEAN, MEDIAN, MODE, VARIANCE, CORRELATION AND NORMAL DISTRIBUTION
+
+import numpy as np
+import statistics as stats
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+
+# Mean calculation
+data = [168, 170, 150, 160, 182, 140, 175, 191, 152, 150]
+print(data)
+mean = np.mean(data)
+print(mean)
+
+a = np.array([[1, 2], [3, 4]])
+print(a)
+print(np.mean(a))
+
+arr = np.random.randint(10, 10000, size=50)
+print(arr)
+print(np.mean(arr))
+
+# Median for even count of samples
+data = [168, 170, 150, 160, 182, 140, 175, 191, 152, 150]
+data.sort()
+print(data)
+median = np.median(data)
+print(median)
+
+# Median for odd count of samples
+data = [168, 170, 150, 160, 182, 140, 175, 191, 152]
+data.sort()
+print(data)
+median = np.median(data)
+print(median)
+
+# Mode calculation
+data = [168, 170, 150, 160, 182, 140, 175, 191, 152, 150]
+print(stats.mode(data))
+
+# Variance calculation
+data = [168, 170, 150, 160, 182, 140, 175, 191, 152, 150]
+mean = np.mean(data)
+print(mean)
+variance = np.var(data)
+print(variance)
+
+# Standard deviation calculation
+data = [168, 170, 150, 160, 182, 140, 175, 191, 152, 150]
+print(data)
+standard_deviation = np.std(data)
+print(standard_deviation)
+
+# Correlation and Scatter Plot
+orbital_period = np.array([88, 225, 365, 460, 687, 1200, 2223,
+                           3831, 5854, 8756, 10015, 20687, 30765, 40190]) # days
+dist_from_sun = np.array([58, 108, 250, 328, 486, 978, 1287,
+                          1890, 2060, 2396, 3400, 3845, 4500, 4800]) # million km
+print(orbital_period, dist_from_sun)
+
+correlation_coeff = np.corrcoef(orbital_period, dist_from_sun)
+print(correlation_coeff)
+
+plt.scatter(orbital_period, dist_from_sun)
+plt.title("Correlation Plot")
+plt.xlabel("Orbital Period")
+plt.ylabel("Distance from Sun")
+plt.show()
+
+# Normal Distribution Function
+def normal_dist(x, mean, sd):
+    prob_density = (np.pi * sd) * np.exp(-0.5 * ((x - mean) / sd) ** 2)
+    return prob_density
+
+mean = 0
+sd = 1
+x = 1
+result = normal_dist(x, mean, sd)
+print(result)
+
+# Normal Distribution PDF Plot
+x_axis = np.arange(-10, 10, 0.01)
+mean = stats.mean(x_axis)
+sd = stats.stdev(x_axis)
+
+plt.plot(x_axis, norm.pdf(x_axis, mean, sd))
+plt.show()
+
+# Normal Distribution Histogram
+Mean = 100
+Standard_deviation = 5
+size = 100000
+
+values = np.random.normal(Mean, Standard_deviation, size)
+plt.hist(values, 100)
+plt.axvline(values.mean(), color='k', linestyle='dashed', linewidth=2)
+plt.show()
