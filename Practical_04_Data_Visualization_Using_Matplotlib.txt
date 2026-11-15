@@ -1,0 +1,76 @@
+# PRACTICAL 04 - DATA VISUALIZATION USING MATPLOTLIB
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+df = pd.read_csv(r"E:\Data Science and Visualization\Lab Manual ISO\DSV Practicals\diabetes.csv")
+df = df.drop(columns=['Pregnancies', 'SkinThickness', 'DiabetesPedigreeFunction', 'Insulin', 'Outcome'])
+df = df.drop(df.index[10:])
+print(df)
+
+# Line plot
+df.plot(kind='line', color=['red', 'blue', 'brown', 'green'])
+plt.title('Features responsible for diabetes')
+plt.xlabel('Observations')
+plt.ylabel('Values')
+plt.show()
+
+# Customized Line plot
+df.plot(kind='line', color=['red', 'blue', 'brown', 'green'],
+        marker='*', markersize=10, linewidth=3, linestyle="--")
+plt.title('Features responsible for diabetes')
+plt.xlabel('Observations')
+plt.ylabel('Values')
+plt.show()
+
+# Bar chart
+df.plot(kind='bar', title='diabetes prediction')
+plt.xlabel('Observations')
+plt.ylabel('Values')
+plt.show()
+
+# Customized Bar Chart
+df.plot(kind='bar', title='diabetes prediction',
+        color=['red', 'yellow', 'purple', 'pink'],
+        edgecolor='Green', linewidth=2, linestyle='--')
+plt.xlabel('Observations')
+plt.ylabel('Values')
+plt.show()
+
+# Scatter plot
+x = df['Age']
+y = df['Glucose']
+plt.scatter(x, y)
+plt.title('Diabetes Prediction')
+plt.xlabel('Age')
+plt.ylabel('Glucose')
+plt.show()
+
+# Customized Scatter Plot (Note: Requires 'Insulin' column from original df)
+x = df['Glucose']
+y = df['Insulin']
+plt.scatter(x, y, color='red', linewidth=2, marker='*', edgecolor='red')
+plt.title('Diabetes Prediction')
+plt.xlabel('Glucose')
+plt.ylabel('Insulin')
+plt.show()
+
+# Histogram
+df.plot(kind='hist', title='diabetes prediction')
+plt.show()
+
+# Customized Histogram
+df.plot(kind='hist', edgecolor='Blue', linewidth=2, linestyle=':', fill=False, hatch='o')
+plt.show()
+
+# Pie chart
+df.plot(kind='pie', y='Glucose', title='Diabetes Prediction', legend=False, autopct="%.2f%%")
+plt.show()
+
+# Box plot
+df.plot(kind='box')
+plt.title('Diabetes Prediction')
+plt.xlabel('Index')
+plt.ylabel('Values')
+plt.show()
