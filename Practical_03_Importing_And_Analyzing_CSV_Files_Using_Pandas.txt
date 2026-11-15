@@ -1,0 +1,39 @@
+# PRACTICAL 03 - IMPORTING AND ANALYZING CSV FILES USING PANDAS
+
+import pandas as pd
+import seaborn as sns
+
+df = pd.read_csv(r"E:\Data Science and Visualization\DSV Practicals\diabetes.csv")
+print(df)
+
+print(df.head())
+print(df.tail())
+
+Dimension = df.shape
+print("DIMENSION:", Dimension)
+
+print(df.size)
+print(df.index)
+
+col = df.columns
+print("Columns:\n", col)
+
+datatype = df.dtypes
+print(datatype)
+
+Summary = df.info()
+print(Summary)
+
+desc = df.describe()
+print(desc)
+
+print(df.memory_usage())
+print(df.isnull())
+print(df.isnull().sum())
+print(df.notnull())
+
+df.dropna()
+
+correlation = df.corr()
+print(correlation)
+sns.heatmap(correlation, annot=True, cmap='RdYlBu')
