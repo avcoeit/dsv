@@ -1,0 +1,45 @@
+# PRACTICAL 06 - LOGISTIC REGRESSION: TITANIC SURVIVAL PREDICTION
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix
+
+# Load dataset
+data = pd.read_csv('titanic.csv')
+
+# Select Relevant Features
+data = data[['Survived', 'Pclass', 'Sex', 'Age']]
+
+# Handle Missing Values
+data['Age'].fillna(data['Age'].median(), inplace=True)
+
+# Encode Categorical Variables
+data['Sex'] = data['Sex'].map({'male': 0, 'female': 1})
+
+# Split data into features and target
+X = data[['Pclass', 'Sex', 'Age']]
+y = data['Survived']
+
+# Split the data into training and testing sets (80/20 split)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Create and train the model
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# Make predictions
+y_pred = model.predict(X_test)
+
+# Evaluate the model
+accuracy = accuracy_score(y_test, y_pred)
+conf_matrix = confusion_matrix(y_test, y_pred)
+
+print(f'Accuracy: {accuracy}')
+print(f'Confusion Matrix:\n{conf_matrix}')
+
+# Predict Probabilities
+probabilities = model.predict_proba(X_test)[:, 1] # Probability of survival
+print(f'Accuracy: {accuracy}')
+print(f'Confusion Matrix:\n{conf_matrix}')
+print(f'Predicted Probabilities of Survival: {probabilities}')
